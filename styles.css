@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
 }
 
 html, body{
@@ -17,6 +16,8 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    cursor: none;
 }
 
 .score{
@@ -49,6 +50,7 @@ body{
     transform: translateX(-50%);
     bottom: 0;
     animation: rise .3s ease-out;
+    user-select: none;
 }
 
 @keyframes rise {
@@ -68,11 +70,11 @@ body{
     left: 100px;
     background-image: url(assets/Untitled-1.png);
     background-size: 100% 100%;
-    transform: translate(-9%, -40%);
+    transform: translate(-24%, -40%);
     transition: transform .1s;
     background-size: contain;
     background-repeat: no-repeat;
-    cursor: none;
+    pointer-events: none;
 } 
 
 .cursor.active{
