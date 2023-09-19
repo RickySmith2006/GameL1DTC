@@ -6,6 +6,8 @@
 
 html, body{
     height: 100%;
+    user-select: none;
+    pointer-events: visible; 
 }
 
 body{
@@ -50,7 +52,7 @@ body{
     transform: translateX(-50%);
     bottom: 0;
     animation: rise .3s ease-out;
-    user-select: none;
+    user-select: none !important;
 }
 
 @keyframes rise {

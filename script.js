@@ -11,6 +11,10 @@ function run(){
     const img = document.createElement('img')
     img.classList.add('kiwi')
     img.src = 'assets/kiwi.png'
+    img.ondragstart = () =>{
+        return false
+    } 
+    // https://plainenglish.io/blog/how-to-disable-dragging-an-image-from-an-html-page-4c84f0c38b76 - i used this code to prevent the image from being dragged
     
     img.addEventListener('click', () => {
         score += 1
@@ -20,7 +24,7 @@ function run(){
         setTimeout(() => {
             hole.removeChild(img)
             run()
-        }, 500)
+        }, 50)
     })
 
     hole.appendChild(img)
