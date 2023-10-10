@@ -93,4 +93,25 @@ body {
 .cursor.active {
     transform: translate(-9%, -40%) rotate(-45deg); /* Transformation for an active cursor */
 }
+/* CSS styles for the "Play Again" button */
+.reset-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+
+    /* Hover effect */
+    &:hover {
+        background-color: #2980b9;
+    }
+
+    /* Active (click) effect */
+    &:active {
+        background-color: #2070a0;
+    }
+}
 
