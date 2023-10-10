@@ -22,7 +22,6 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden; /* Hide content overflow */
-    cursor: none; /* Hide the cursor */
 }
 
 /* Styling for the "SCORE" element */
@@ -75,21 +74,23 @@ body {
 
 /* Styling for the cursor element */
 .cursor {
-    height: 320px;
-    width: 320px;
+    height: 320px; /* Adjust the cursor size as needed */
+    width: 320px; /* Adjust the cursor size as needed */
     position: absolute;
     top: 100px;
     left: 100px;
-    background-image: url(assets/Untitled-1.png); /* Background image */
+    background-image: url(assets/Untitled-1.png);
     background-size: 100% 100%;
-    transform: translate(-24%, -40%);
+    transform: translate(-34%, -40%);
     transition: transform .1s;
     background-size: contain;
     background-repeat: no-repeat;
-    pointer-events: none; /* Disable pointer events for the cursor */
+    pointer-events: none;
+    cursor: pointer;
 }
 
 /* Styling for the active cursor state */
 .cursor.active {
     transform: translate(-9%, -40%) rotate(-45deg); /* Transformation for an active cursor */
 }
+
