@@ -83,7 +83,7 @@ function run() {
         if (score < 10) {
             run();
         }
-    }, 800)
+    }, 600)
 }
 
 // Start the game
@@ -106,3 +106,62 @@ window.addEventListener('mouseup', () => {
 })
 
 // chatgbt was used to add the end of the game events
+
+
+
+
+
+
+// Function to create a bomb element
+function createBomb() {
+    const bombHole = document.createElement('div');
+    bombHole.classList.add('hole', 'bomb-hole');
+    const bomb = document.createElement('img');
+    bomb.src = 'assets/bomb.png';
+    bomb.alt = 'Bomb';
+    bomb.classList.add('bomb');
+    bombHole.appendChild(bomb);
+    document.body.appendChild(bombHole);
+    return bombHole;
+}
+
+// Function to handle the player clicking on a bomb
+function handleBombClick() {
+    // Call the loseGame function to end the game
+    loseGame();
+}
+
+// ...
+
+// Modify the run function to randomly place kiwis and bombs
+function run() {
+    if (score === 10) {
+        return;
+    }
+
+    const i = Math.floor(Math.random() * holes.length);
+
+    if (i === 0) {
+        // Place a bomb
+        const bombHole = createBomb();
+        const hole = holes[i];
+        hole.appendChild(bombHole);
+
+        // Add a click event listener for the bomb
+        bombHole.addEventListener('click', handleBombClick);
+    } else {
+        // Place a kiwi
+        const hole = holes[i];
+        // ... (same code as before)
+    }
+
+    // Set a timer to remove the kiwi or bomb after 600 milliseconds
+    timer = setTimeout(() => {
+        hole.innerHTML = '';
+        if (score < 10) {
+            run();
+        }
+    }, 600);
+}
+
+// ...
