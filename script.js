@@ -121,3 +121,53 @@ window.addEventListener('mousedown', () => {
 window.addEventListener('mouseup', () => {
     cursor.classList.remove('active');
 });
+
+
+
+
+// Define variables for difficulty settings
+let bombChance, kiwiSpeed;
+
+// Difficulty level buttons
+const easyButton = document.getElementById('easy');
+const mediumButton = document.getElementById('medium');
+const hardButton = document.getElementById('hard');
+
+// Difficulty level settings
+easyButton.addEventListener('click', () => {
+    bombChance = 0.3; // Adjust as needed
+    kiwiSpeed = 800;  // Adjust as needed
+    resetGame();
+});
+
+mediumButton.addEventListener('click', () => {
+    bombChance = 0.5; // Adjust as needed
+    kiwiSpeed = 600;  // Adjust as needed
+    resetGame();
+});
+
+hardButton.addEventListener('click', () => {
+    bombChance = 0.7; // Adjust as needed
+    kiwiSpeed = 400;  // Adjust as needed
+    resetGame();
+});
+
+// Function to reset the game
+function resetGame() {
+    score = 0;
+    gameEnded = false;
+    scoreEl.textContent = score;
+    clearHoles();
+    run();
+}
+
+// Function to clear all holes
+function clearHoles() {
+    holes.forEach((hole) => {
+        while (hole.firstChild) {
+            hole.removeChild(hole.firstChild);
+        }
+    });
+}
+
+// Rest of your existing code, make sure to update the 'isBomb' condition

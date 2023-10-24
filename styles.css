@@ -128,3 +128,19 @@ body {
     }
 }
 
+
+
+.difficulty-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.difficulty-button:hover {
+    background-color: #2980b9;
+}
