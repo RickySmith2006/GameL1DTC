@@ -62,6 +62,19 @@ body {
     user-select: none !important; /* Disable text selection */
 }
 
+.hole .bomb {
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    animation: rise .3s ease-out; /* Animation for the bomb */
+    user-select: none !important; /* Disable text selection */
+}
+
+
+
+
 /* Keyframes animation for the kiwi rising */
 @keyframes rise {
     0% {

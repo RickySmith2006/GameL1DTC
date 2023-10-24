@@ -50,15 +50,17 @@ function run() {
     // Generate a random index to select a hole
     const i = Math.floor(Math.random() * holes.length);
     const hole = holes[i];
+    
+// Determine if it's a bomb or kiwi
+const isBomb = Math.random() < 0.5; // 50% chance for a bomb
 
-    // Determine if it's a bomb or kiwi
-    const isBomb = Math.random() < 0.1; // 10% chance for a bomb
+// Create an image element
+const img = document.createElement('img');
+img.classList.add(isBomb ? 'bomb' : 'kiwi');
+img.src = isBomb ? 'assets/bomb.png' : 'assets/kiwi.png'; // Set the src attribute
+img.alt = isBomb ? 'Bomb' : 'Kiwi';
 
-    // Create an image element
-    const img = document.createElement('img');
-    img.classList.add(isBomb ? 'bomb' : 'kiwi');
-    img.src = isBomb ? 'assets/bomb.png' : 'assets/kiwi.png';
-    img.alt = isBomb ? 'Bomb' : 'Kiwi';
+  
 
     // Prevent the image from being dragged
     img.draggable = false;
