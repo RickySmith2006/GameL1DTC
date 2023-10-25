@@ -52,7 +52,7 @@ function run() {
     const hole = holes[i];
     
 // Determine if it's a bomb or kiwi
-const isBomb = Math.random() < 0.5; // 50% chance for a bomb
+const isBomb = Math.random() < 0.4; // 40% chance for a bomb
 
 // Create an image element
 const img = document.createElement('img');
@@ -100,7 +100,7 @@ img.alt = isBomb ? 'Bomb' : 'Kiwi';
         if (score < 10) {
             run();
         }
-    }, 600);
+    }, 800);
 }
 
 // Call the `run` function to start the game
@@ -125,49 +125,37 @@ window.addEventListener('mouseup', () => {
 
 
 
-// Define variables for difficulty settings
-let bombChance, kiwiSpeed;
 
-// Difficulty level buttons
-const easyButton = document.getElementById('easy');
-const mediumButton = document.getElementById('medium');
-const hardButton = document.getElementById('hard');
+// Select the difficulty level buttons
+const difficultyButtons = document.querySelectorAll('.difficulty-button');
 
-// Difficulty level settings
-easyButton.addEventListener('click', () => {
-    bombChance = 0.3; // Adjust as needed
-    kiwiSpeed = 800;  // Adjust as needed
+// Define the initial difficulty settings
+let kiwiSpeed = 800; // Default kiwi speed for easy mode
+
+// Function to update the active difficulty button and kiwi speed
+function updateDifficulty(button, speed) {
+    kiwiSpeed = speed;
+    difficultyButtons.forEach((btn) => {
+        btn.classList.remove('active');
+    });
+    button.classList.add('active');
     resetGame();
-});
-
-mediumButton.addEventListener('click', () => {
-    bombChance = 0.5; // Adjust as needed
-    kiwiSpeed = 600;  // Adjust as needed
-    resetGame();
-});
-
-hardButton.addEventListener('click', () => {
-    bombChance = 0.7; // Adjust as needed
-    kiwiSpeed = 400;  // Adjust as needed
-    resetGame();
-});
-
-// Function to reset the game
-function resetGame() {
-    score = 0;
-    gameEnded = false;
-    scoreEl.textContent = score;
-    clearHoles();
-    run();
 }
 
-// Function to clear all holes
-function clearHoles() {
-    holes.forEach((hole) => {
-        while (hole.firstChild) {
-            hole.removeChild(hole.firstChild);
+// Event listeners for the difficulty buttons
+difficultyButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (button.id === 'easy') {
+            updateDifficulty(button, 800); // Adjust kiwi speed for easy mode
+        } else if (button.id === 'medium') {
+            updateDifficulty(button, 600); // Adjust kiwi speed for medium mode
+        } else if (button.id === 'hard') {
+            updateDifficulty(button, 400); // Adjust kiwi speed for hard mode
         }
     });
-}
+});
 
-// Rest of your existing code, make sure to update the 'isBomb' condition
+// Rest of your existing code
+
+
+

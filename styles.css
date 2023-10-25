@@ -58,7 +58,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     bottom: 0;
-    animation: rise .3s ease-out; /* Animation for the kiwi */
+    animation: rise .1s ease-out; /* Animation for the kiwi */
     user-select: none !important; /* Disable text selection */
 }
 
@@ -68,7 +68,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     bottom: 0;
-    animation: rise .3s ease-out; /* Animation for the bomb */
+    animation: rise .1s ease-out; /* Animation for the bomb */
     user-select: none !important; /* Disable text selection */
 }
 
@@ -139,8 +139,19 @@ body {
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
+    
 }
 
 .difficulty-button:hover {
     background-color: #2980b9;
+}
+
+.difficulty-button-container{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
+
+.difficulty-button.active {
+    background-color: #297fb9c0; /* Highlight color for the selected button */
 }
