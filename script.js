@@ -101,31 +101,8 @@ img.alt = isBomb ? 'Bomb' : 'Kiwi';
             run();
         }
     }, 800);
-}
 
-// Call the `run` function to start the game
-run();
-
-// Add a mousemove event listener to update the cursor position
-window.addEventListener('mousemove', e => {
-    cursor.style.top = e.pageY + 'px';
-    cursor.style.left = e.pageX + 'px';
-});
-
-// Add a mousedown event listener to activate the cursor
-window.addEventListener('mousedown', () => {
-    cursor.classList.add('active');
-});
-
-// Add a mouseup event listener to deactivate the cursor
-window.addEventListener('mouseup', () => {
-    cursor.classList.remove('active');
-});
-
-
-
-
-
+    
 // Select the difficulty level buttons
 const difficultyButtons = document.querySelectorAll('.difficulty-button');
 
@@ -156,6 +133,45 @@ difficultyButtons.forEach((button) => {
 });
 
 // Rest of your existing code
+}
+
+
+
+
+// Call the `run` function to start the game
+run();
+
+// Add a mousemove event listener to update the cursor position
+window.addEventListener('mousemove', e => {
+    cursor.style.top = e.pageY + 'px';
+    cursor.style.left = e.pageX + 'px';
+});
+
+// Add a mousedown event listener to activate the cursor
+window.addEventListener('mousedown', () => {
+    cursor.classList.add('active');
+});
+
+// Add a mouseup event listener to deactivate the cursor
+window.addEventListener('mouseup', () => {
+    cursor.classList.remove('active');
+});
+
+// Function to reset the game
+function resetGame() {
+    score = 0;
+    gameEnded = false;
+    scoreEl.textContent = score;
+    clearHoles();
+    run();
+}
+
+
+
+
+
+
+
 
 
 
