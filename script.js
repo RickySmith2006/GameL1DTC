@@ -1,5 +1,12 @@
 // Select the cursor element, all holes, and the score span element
 const cursor = document.querySelector('.cursor');
+const board = document.querySelector('.board');
+const instructions = document.querySelector('.instructions');
+const difficulty = document.querySelector('.difficulty-button-container');
+const scoreDisplay = document.querySelector('.score');
+
+
+
 const holes = [...document.querySelectorAll('.hole')];
 const scoreEl = document.querySelector('.score span');
 
@@ -11,15 +18,20 @@ let gameEnded = false;
 function endGame(message) {
     if (!gameEnded) {
         gameEnded = true;
-        // Hide the cursor
+        // Hide the cursor, board, instructions, difficulty, and score 
         cursor.style.display = 'none';
+        board.style.display = 'none';
+        instructions.style.display = 'none';
+        difficulty.style.display = 'none';
+        scoreDisplay.style.display = 'none';
+
 
         // Display an end message
         const endScreen = document.createElement('div');
         endScreen.classList.add('end-screen');
         endScreen.innerHTML = `
-            <div class="end-message">
-                <h2>${message}</h2>
+            <div class="end-message" style="text-align: center;">
+                <h1 style="font-size: 5rem">${message}</h1>
                 <button class="reset-button">Play Again</button>
             </div>
         `;
@@ -50,17 +62,15 @@ function run() {
     // Generate a random index to select a hole
     const i = Math.floor(Math.random() * holes.length);
     const hole = holes[i];
-    
-// Determine if it's a bomb or kiwi
-const isBomb = Math.random() < 0.4; // 40% chance for a bomb
 
-// Create an image element
-const img = document.createElement('img');
-img.classList.add(isBomb ? 'bomb' : 'kiwi');
-img.src = isBomb ? 'assets/bomb.png' : 'assets/kiwi.png'; // Set the src attribute
-img.alt = isBomb ? 'Bomb' : 'Kiwi';
+    // Determine if it's a bomb or kiwi
+    const isBomb = Math.random() < 0.4; // 40% chance for a bomb
 
-  
+    // Create an image element
+    const img = document.createElement('img');
+    img.classList.add(isBomb ? 'bomb' : 'kiwi');
+    img.src = isBomb ? 'assets/bomb.png' : 'assets/kiwi.png'; // Set the src attribute
+    img.alt = isBomb ? 'Bomb' : 'Kiwi';
 
     // Prevent the image from being dragged
     img.draggable = false;
@@ -93,47 +103,20 @@ img.alt = isBomb ? 'Bomb' : 'Kiwi';
     // Add the image to the selected hole
     hole.appendChild(img);
 
-    // Set a timer to remove the kiwi/bomb after 600 milliseconds
+    // Set a timer to remove the kiwi/bomb after "x"x amount of milliseconds
     setTimeout(() => {
-        hole.removeChild(img);
-        // Continue the game if the score is less than 10
-        if (score < 10) {
-            run();
+        if (hole.contains(img)) {
+            hole.removeChild(img);
+            // Continue the game if the score is less than 10
+            if (score < 10) {
+                run();
+            }
         }
-    }, 800);
-
+    }, 900);
     
-// Select the difficulty level buttons
-const difficultyButtons = document.querySelectorAll('.difficulty-button');
-
-// Define the initial difficulty settings
-let kiwiSpeed = 800; // Default kiwi speed for easy mode
-
-// Function to update the active difficulty button and kiwi speed
-function updateDifficulty(button, speed) {
-    kiwiSpeed = speed;
-    difficultyButtons.forEach((btn) => {
-        btn.classList.remove('active');
-    });
-    button.classList.add('active');
-    resetGame();
 }
 
-// Event listeners for the difficulty buttons
-difficultyButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        if (button.id === 'easy') {
-            updateDifficulty(button, 800); // Adjust kiwi speed for easy mode
-        } else if (button.id === 'medium') {
-            updateDifficulty(button, 600); // Adjust kiwi speed for medium mode
-        } else if (button.id === 'hard') {
-            updateDifficulty(button, 400); // Adjust kiwi speed for hard mode
-        }
-    });
-});
 
-// Rest of your existing code
-}
 
 
 
@@ -158,20 +141,19 @@ window.addEventListener('mouseup', () => {
 });
 
 // Function to reset the game
+// Function to reset the game
 function resetGame() {
     score = 0;
     gameEnded = false;
     scoreEl.textContent = score;
-    clearHoles();
+
+    // Clear the holes by removing all child elements from each hole
+    holes.forEach((hole) => {
+        while (hole.firstChild) {
+            hole.removeChild(hole.firstChild);
+        }
+    });
+
     run();
 }
-
-
-
-
-
-
-
-
-
 

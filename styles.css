@@ -22,7 +22,10 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden; /* Hide content overflow */
+    margin-top: 1rem;
 }
+
+
 
 /* Styling for the "SCORE" element */
 .score {
@@ -116,18 +119,11 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease; /* Add a smooth transition effect */
-
-    /* Hover effect */
-    &:hover {
-        background-color: #2980b9;
-    }
-
-    /* Active (click) effect */
-    &:active {
-        background-color: #2070a0;
-    }
 }
 
+.reset-button:hover{
+    background-color: #2980b9;
+}
 
 
 .difficulty-button {
@@ -155,3 +151,4 @@ body {
 .difficulty-button.active {
     background-color: #297fb9c0; /* Highlight color for the selected button */
 }
+
