@@ -1,9 +1,11 @@
+
 // Select the cursor element, all holes, and the score span element
 const cursor = document.querySelector('.cursor');
 const board = document.querySelector('.board');
 const instructions = document.querySelector('.instructions');
 const difficulty = document.querySelector('.difficulty-button-container');
 const scoreDisplay = document.querySelector('.score');
+let kiwiSpeed = 900;
 
 
 
@@ -68,6 +70,41 @@ function run() {
         return;
     }
 
+
+// Add event listeners to set kiwiSpeed based on difficulty level
+const easyButton = document.getElementById('easy');
+const mediumButton = document.getElementById('medium');
+const hardButton = document.getElementById('hard');
+
+
+easyButton.addEventListener('click', () => {
+    kiwiSpeed = 900; // Set the kiwiSpeed for the easy mode
+    // Update active class
+    easyButton.classList.add('active');
+    mediumButton.classList.remove('active');
+    hardButton.classList.remove('active');
+});
+
+mediumButton.addEventListener('click', () => {
+    kiwiSpeed = 600; // Set the kiwiSpeed for the medium mode
+    // Update active class
+    easyButton.classList.remove('active');
+    mediumButton.classList.add('active');
+    hardButton.classList.remove('active');
+});
+
+hardButton.addEventListener('click', () => {
+    kiwiSpeed = 500; // Set the kiwiSpeed for the hard mode
+    // Update active class
+    easyButton.classList.remove('active');
+    mediumButton.classList.remove('active');
+    hardButton.classList.add('active');
+});
+
+
+
+
+
     isRunning = true; // Set the running flag to true
 
     // Generate a random index to select a hole
@@ -106,7 +143,7 @@ function run() {
                     }
                 }, 50);
             }
-        });
+        }); 
     } else {
         img.addEventListener('click', handleBombClick);
     }
@@ -121,7 +158,7 @@ function run() {
                 run();
             }
         }
-    }, 900);
+    }, kiwiSpeed);
 }
 
 
