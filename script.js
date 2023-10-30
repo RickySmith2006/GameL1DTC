@@ -55,17 +55,27 @@ function handleBombClick() {
 
 // Function to run the game
 // Function to run the game
+let isRunning = false; // Flag to check if the game is already running
+
+// Function to run the game
 function run() {
     if (gameEnded) {
         return;
     }
+
+    if (isRunning) {
+        // If the game is already running, don't start a new game loop
+        return;
+    }
+
+    isRunning = true; // Set the running flag to true
 
     // Generate a random index to select a hole
     const i = Math.floor(Math.random() * holes.length);
     const hole = holes[i];
 
     // Determine if it's a bomb or kiwi
-    const isBomb = Math.random() < 0.4; // 40% chance for a bomb
+    const isBomb = Math.random() < 0.3; // 35% chance for a bomb
 
     // Create an image element
     const img = document.createElement('img');
@@ -79,46 +89,42 @@ function run() {
     if (!isBomb) {
         // Add a click event listener for the kiwi
         img.addEventListener('click', () => {
-            if (hole.contains(img)) { // Check if the kiwi is still in the hole
-                // Increase the score when the kiwi is clicked
+            if (hole.contains(img)) {
                 score += 1;
                 scoreEl.textContent = score;
-                // Check if the game has ended
                 if (score === 10) {
                     endGame('You Won!');
                 }
-                // Change the image source and handle kiwi removal
                 img.src = 'assets/kiwi-whacked.png';
                 setTimeout(() => {
-                    if (hole.contains(img)) { // Check if the kiwi is still in the hole
+                    if (hole.contains(img)) {
                         hole.removeChild(img);
-                    }
-                    // Continue the game if the score is less than 10
-                    if (score < 10) {
-                        run();
+                        isRunning = false; // Set the running flag to false after handling the click
+                        if (score < 10) {
+                            run();
+                        }
                     }
                 }, 50);
             }
         });
     } else {
-        // Add a click event listener for the bomb
         img.addEventListener('click', handleBombClick);
     }
 
-    // Add the image to the selected hole
     hole.appendChild(img);
 
-    // Set a timer to remove the kiwi/bomb after "x" milliseconds
     setTimeout(() => {
-        if (hole.contains(img)) { // Check if the kiwi is still in the hole
+        if (hole.contains(img)) {
             hole.removeChild(img);
-            // Continue the game if the score is less than 10
+            isRunning = false; // Set the running flag to false when the game loop is complete
             if (score < 10) {
                 run();
             }
         }
     }, 900);
 }
+
+
 
 
 
