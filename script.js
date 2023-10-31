@@ -5,12 +5,58 @@ const board = document.querySelector('.board');
 const instructions = document.querySelector('.instructions');
 const difficulty = document.querySelector('.difficulty-button-container');
 const scoreDisplay = document.querySelector('.score');
+const timer = document.querySelector('.timer');
 let kiwiSpeed = 900;
+
 
 
 
 const holes = [...document.querySelectorAll('.hole')];
 const scoreEl = document.querySelector('.score span');
+
+
+const startButton = document.getElementById('start-button');
+const startScreen = document.querySelector('.start-screen');
+const gameElements = document.querySelector('.game-elements');
+const boardShow = document.querySelector('.board');
+const timerShow = document.querySelector('.timerShow')
+const textDifficulty = document.querySelector('.text-difficulty')
+
+
+
+startButton.addEventListener('click', () => {
+    startScreen.style.display = 'none'; // Hide the start screen
+    gameElements.style.display = 'inline-block'; // Display the game elements
+    boardShow.style.display = 'grid'; //Display Board
+    timerShow.style.display = 'inline-block'; //Display timer
+    textDifficulty.style.display= 'none'
+    instructions.style.display= 'none'
+
+    // Start the timer or game logic
+    // ...
+});
+
+
+
+const timerElement = document.getElementById('timer');
+const timeRemainingElement = document.getElementById('time-remaining');
+
+let timeRemaining = 30; // Initial time in seconds
+
+function updateTimer() {
+    timeRemaining--;
+    timeRemainingElement.textContent = timeRemaining;
+    
+    if (timeRemaining <= 0) {
+        clearInterval(timerInterval);
+        endGame('Out of Time!');
+    }
+}
+
+// Call updateTimer every second (1000ms)
+const timerInterval = setInterval(updateTimer, 1000);
+
+
 
 // Initialize the score variable
 let score = 0;
@@ -26,6 +72,8 @@ function endGame(message) {
         instructions.style.display = 'none';
         difficulty.style.display = 'none';
         scoreDisplay.style.display = 'none';
+        timer.style.display = 'none';
+
 
 
         // Display an end message

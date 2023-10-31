@@ -27,20 +27,32 @@ body {
 
 
 
+
 /* Styling for the "SCORE" element */
 .score {
-    font-size: 4m; /* Font size */
+    font-size: 2rem; /* Font size */
     margin-bottom: .5em; /* Margin below the score */
+}
+
+.timer{
+    font-size: 2rem; /* Font size */
+    margin-bottom: .5em; /* Margin below the timer */
 }
 
 /* Styling for the game board */
 .board {
-    height: 600px;
-    width: 600px;
-    display: grid;
+    height: 500px;
+    width: 500px;
+    display: none;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 80px; /* Gap between holes */
+    gap: 60px; /* Gap between holes */
+}
+
+
+/* hide all elements at start of game */
+.game-elements {
+    display: none;
 }
 
 /* Styling for the individual holes */
@@ -125,12 +137,27 @@ body {
     background-color: #2980b9;
 }
 
+.start-button{
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 20px 30px;
+    border-radius: 9px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+
+.start-button:hover{
+    background-color: #2980b9;
+
+}
 
 .difficulty-button {
     background-color: #3498db;
     color: #fff;
     padding: 10px 20px;
-    margin: 10px;
+    margin: 30px 10px 10px 10px;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -150,5 +177,9 @@ body {
 
 .difficulty-button.active {
     background-color: #297fb9c0; /* Highlight color for the selected button */
+}
+
+.text-difficulty{
+    margin-top: 3rem;
 }
 
