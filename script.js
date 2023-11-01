@@ -6,7 +6,7 @@ const instructions = document.querySelector('.instructions');
 const difficulty = document.querySelector('.difficulty-button-container');
 const scoreDisplay = document.querySelector('.score');
 const timer = document.querySelector('.timer');
-let kiwiSpeed = 900;
+let kiwiSpeed = 1200;
 
 
 
@@ -32,8 +32,8 @@ startButton.addEventListener('click', () => {
     textDifficulty.style.display= 'none'
     instructions.style.display= 'none'
 
-    // Start the timer or game logic
-    // ...
+    startTimer();
+
 });
 
 
@@ -53,9 +53,9 @@ function updateTimer() {
     }
 }
 
-// Call updateTimer every second (1000ms)
-const timerInterval = setInterval(updateTimer, 1000);
-
+function startTimer() {
+    timerInterval = setInterval(updateTimer, 1000);
+}
 
 
 // Initialize the score variable
@@ -73,6 +73,7 @@ function endGame(message) {
         difficulty.style.display = 'none';
         scoreDisplay.style.display = 'none';
         timer.style.display = 'none';
+        clearInterval(timerInterval);
 
 
 
@@ -104,7 +105,6 @@ function handleBombClick() {
 }
 
 // Function to run the game
-// Function to run the game
 let isRunning = false; // Flag to check if the game is already running
 
 // Function to run the game
@@ -126,7 +126,7 @@ const hardButton = document.getElementById('hard');
 
 
 easyButton.addEventListener('click', () => {
-    kiwiSpeed = 900; // Set the kiwiSpeed for the easy mode
+    kiwiSpeed = 1200; // Set the kiwiSpeed for the easy mode
     // Update active class
     easyButton.classList.add('active');
     mediumButton.classList.remove('active');
@@ -134,7 +134,7 @@ easyButton.addEventListener('click', () => {
 });
 
 mediumButton.addEventListener('click', () => {
-    kiwiSpeed = 600; // Set the kiwiSpeed for the medium mode
+    kiwiSpeed = 800; // Set the kiwiSpeed for the medium mode
     // Update active class
     easyButton.classList.remove('active');
     mediumButton.classList.add('active');
@@ -142,7 +142,7 @@ mediumButton.addEventListener('click', () => {
 });
 
 hardButton.addEventListener('click', () => {
-    kiwiSpeed = 500; // Set the kiwiSpeed for the hard mode
+    kiwiSpeed = 600; // Set the kiwiSpeed for the hard mode
     // Update active class
     easyButton.classList.remove('active');
     mediumButton.classList.remove('active');
@@ -160,7 +160,7 @@ hardButton.addEventListener('click', () => {
     const hole = holes[i];
 
     // Determine if it's a bomb or kiwi
-    const isBomb = Math.random() < 0.3; // 35% chance for a bomb
+    const isBomb = Math.random() < 0.3; // 30% chance for a bomb
 
     // Create an image element
     const img = document.createElement('img');
@@ -252,3 +252,6 @@ function resetGame() {
 
     run();
 }
+
+
+
