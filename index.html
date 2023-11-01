@@ -1,29 +1,31 @@
-<!DOCTYPE html> <!-- Declares the document type as HTML5 -->
-
-<html lang="en"> <!-- The root HTML element with the 'en' (English) language attribute -->
-
+<!DOCTYPE html>
+<html lang="en"> 
 <head>
-    <meta charset="UTF-8"> <!-- Specifies the character encoding for the document as UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Sets the viewport for responsive design -->
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="styles.css"> <!-- Links an external CSS stylesheet for styling -->
-    <title>Whack-a-kiwi</title> <!-- Sets the title of the web page (you can replace "Document" with your desired title) -->
+    <title>Whack-a-kiwi</title> <!-- Sets the title of the web page -->
 </head>
 
 <body>
 
-    <div style="margin-bottom: 6rem;" class="instructions"><b>Instructions:</b>You have 30 Seconds to Click the Kiwi 10 times to win, but dont Click on the Bomb though!</div>
+    <div style="margin-bottom: 6rem;" class="instructions"><b>Instructions:</b>You have 30 Seconds to Click the Kiwi 10 times to win, but don't Click on the Bomb though!</div>
+    <!-- Instructions for the game -->
+
     <div class="start-screen">
         <button id="start-button" class="start-button">Start Game</button>
     </div>
-    
-    
+    <!-- Start button to begin the game -->
 
     <div id="timer" style="display: none;" class="timer timerShow">Time: <span id="time-remaining">30</span> seconds</div>
+    <!-- Timer display showing the remaining time -->
 
-    <h1 style="display: none;" class="score game-elements">SCORE: <span>0</span></h1> <!-- Heading with a class "score" and a nested span element -->
+    <h1 style="display: none;" class="score game-elements">SCORE: <span>0</span></h1>
+    <!-- Heading displaying the score (hidden initially) -->
+    
     <div class="board">
         <!-- A div element with the class "board" -->
-        <div class="hole"></div> <!-- Multiple div elements with the class "hole" -->
+        <div class="hole"></div> <!-- Multiple div elements with the class "hole" representing game holes -->
         <div class="hole"></div>
         <div class="hole"></div>
         <div class="hole"></div>
@@ -33,20 +35,23 @@
         <div class="hole"></div>
         <div class="hole"></div>
     </div>
+    <!-- Game board with holes -->
 
-<div class="text-difficulty">Choose your difficulty</div>
+    <div class="text-difficulty">Choose your difficulty</div>
+    <!-- Text indicating difficulty selection -->
 
     <div class="difficulty-button-container">
         <button class="easy-button difficulty-button active" id="easy">Easy</button>
         <button class="medium-button difficulty-button" id="medium">Medium</button>
         <button class="hard-button difficulty-button" id="hard">Hard</button>
     </div>
+    <!-- Difficulty selection buttons -->
 
     <div class="cursor">
-        <!-- Another div element with the class "cursor" -->
+        <!-- Cursor element for the game -->
     </div>
 
-    <script src="script.js"></script> <!-- Links an external JavaScript file named "script.js" -->
+    <script src="script.js"></script> <!-- Links an external JavaScript file named "script.js" for game functionality -->
 
 </body>
 </html>

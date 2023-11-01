@@ -1,44 +1,45 @@
+// Select elements from the DOM
+const cursor = document.querySelector('.cursor'); // Select the cursor element
+const board = document.querySelector('.board'); // Select the board element
+const instructions = document.querySelector('.instructions'); // Select the instructions element
+const difficulty = document.querySelector('.difficulty-button-container'); // Select the difficulty button container
+const scoreDisplay = document.querySelector('.score'); // Select the score display element
+const timer = document.querySelector('.timer'); // Select the timer element
+const difficultyButton = document.querySelector('.difficulty-button'); // Select the difficulty button
 
-// Select the cursor element, all holes, and the score span element
-const cursor = document.querySelector('.cursor');
-const board = document.querySelector('.board');
-const instructions = document.querySelector('.instructions');
-const difficulty = document.querySelector('.difficulty-button-container');
-const scoreDisplay = document.querySelector('.score');
-const timer = document.querySelector('.timer');
-const difficultyButton = document.querySelector('.difficulty-button');
+let kiwiSpeed = 1200; // Initial kiwi movement speed
 
-let kiwiSpeed = 1200;
-
+// Create an array of holes by selecting all elements with the class 'hole'
 const holes = [...document.querySelectorAll('.hole')];
-const scoreEl = document.querySelector('.score span');
+const scoreEl = document.querySelector('.score span'); // Select the score span element
 
+// Select the "Start Game" button and other elements
 const startButton = document.getElementById('start-button');
 const startScreen = document.querySelector('.start-screen');
 const gameElements = document.querySelector('.game-elements');
 const boardShow = document.querySelector('.board');
-const timerShow = document.querySelector('.timerShow')
-const textDifficulty = document.querySelector('.text-difficulty')
+const timerShow = document.querySelector('.timerShow');
+const textDifficulty = document.querySelector('.text-difficulty');
+const difficultyIndicator = document.querySelector('.difficulty-indicator');
 
-
-let selectedDifficulty = '';
+let selectedDifficulty = ''; // Initialize the selected difficulty
 
 // Add a click event listener to the "Start Game" button
 startButton.addEventListener('click', () => {
-    startScreen.style.display = 'none'; // Hide the start screen
-    gameElements.style.display = 'inline-block'; // Display the game elements
-    boardShow.style.display = 'grid'; // Display Board
-    timerShow.style.display = 'inline-block'; // Display timer
+    // Hide elements and start the game
+    startScreen.style.display = 'none';
+    gameElements.style.display = 'inline-block';
+    boardShow.style.display = 'grid';
+    timerShow.style.display = 'inline-block';
     textDifficulty.style.display = 'none';
     instructions.style.display = 'none';
-    difficultyButton.style.display ='none';
-    difficulty.style.display ='none';
+    difficultyButton.style.display = 'none';
+    difficulty.style.display = 'none';
 
+    // Start the timer
+    startTimer();
 
-        // Start the timer
-        startTimer();
-
-    // Set the selected difficulty
+    // Set the selected difficulty based on the active button
     if (document.querySelector('.easy-button').classList.contains('active')) {
         selectedDifficulty = 'Easy';
     } else if (document.querySelector('.medium-button').classList.contains('active')) {
@@ -47,26 +48,22 @@ startButton.addEventListener('click', () => {
         selectedDifficulty = 'Hard';
     }
 
-    // Create an element to display the selected difficulty
+    // Create and display an element to show the selected difficulty
     const difficultyElement = document.createElement('div');
     difficultyElement.classList.add('difficulty-indicator');
     difficultyElement.textContent = `Difficulty: ${selectedDifficulty}`;
     document.body.appendChild(difficultyElement);
 });
 
-
-
-//Timer
-
+// Timer functionality
 const timerElement = document.getElementById('timer');
 const timeRemainingElement = document.getElementById('time-remaining');
-
 let timeRemaining = 30; // Initial time in seconds
 
 function updateTimer() {
     timeRemaining--;
     timeRemainingElement.textContent = timeRemaining;
-    
+
     if (timeRemaining <= 0) {
         clearInterval(timerInterval);
         endGame('Out of Time!');
@@ -77,8 +74,7 @@ function startTimer() {
     timerInterval = setInterval(updateTimer, 1000);
 }
 
-
-// Initialize the score variable
+// Initialize the score variable and gameEnded flag
 let score = 0;
 let gameEnded = false;
 
@@ -86,31 +82,30 @@ let gameEnded = false;
 function endGame(message) {
     if (!gameEnded) {
         gameEnded = true;
-        // Hide the cursor, board, instructions, difficulty, and score 
+
+        // Hide elements and clear the difficulty indicator
         cursor.style.display = 'none';
         board.style.display = 'none';
         instructions.style.display = 'none';
         difficulty.style.display = 'none';
         scoreDisplay.style.display = 'none';
         timer.style.display = 'none';
-        const difficultyIndicator = document.querySelector('.difficulty-indicator')
-        difficultyIndicator.style.display ='none';
+        const difficultyIndicator = document.querySelector('.difficulty-indicator');
+        difficultyIndicator.style.display = 'none';
         clearInterval(timerInterval);
-        
-        
-        
-        // Display an end message
+
+        // Display an end message and a "Play Again" button
         const endScreen = document.createElement('div');
         endScreen.classList.add('end-screen');
         endScreen.innerHTML = `
-        <div class="end-message" style="text-align: center;">
-        <h1 style="font-size: 5rem">${message}</h1>
-        <button class="reset-button">Play Again</button>
-        </div>
+            <div class="end-message" style="text-align: center;">
+                <h1 style="font-size: 5rem">${message}</h1>
+                <button class="reset-button">Play Again</button>
+            </div>
         `;
         document.body.appendChild(endScreen);
-        
-        // Add a click event listener to the reset button
+
+        // Add a click event listener to the "Play Again" button
         const resetButton = document.querySelector('.reset-button');
         resetButton.addEventListener('click', () => {
             // Reload the page to restart the game
@@ -118,9 +113,6 @@ function endGame(message) {
         });
     }
 }
-
-
-
 
 // Function to handle the player clicking on a bomb
 function handleBombClick() {
@@ -132,70 +124,54 @@ function handleBombClick() {
 // Function to run the game
 let isRunning = false; // Flag to check if the game is already running
 
-// Function to run the game
 function run() {
     if (gameEnded) {
         return;
     }
 
     if (isRunning) {
-        // If the game is already running, don't start a new game loop
-        return;
+        return; // If the game is already running, don't start a new game loop
     }
 
+    // Event listeners to set kiwiSpeed based on difficulty level
+    const easyButton = document.getElementById('easy');
+    const mediumButton = document.getElementById('medium');
+    const hardButton = document.getElementById('hard');
 
-// Add event listeners to set kiwiSpeed based on difficulty level
-const easyButton = document.getElementById('easy');
-const mediumButton = document.getElementById('medium');
-const hardButton = document.getElementById('hard');
+    easyButton.addEventListener('click', () => {
+        kiwiSpeed = 1200; // Set the kiwiSpeed for the easy mode
+        easyButton.classList.add('active');
+        mediumButton.classList.remove('active');
+        hardButton.classList.remove('active');
+    });
 
+    mediumButton.addEventListener('click', () => {
+        kiwiSpeed = 800; // Set the kiwiSpeed for the medium mode
+        easyButton.classList.remove('active');
+        mediumButton.classList.add('active');
+        hardButton.classList.remove('active');
+    });
 
-easyButton.addEventListener('click', () => {
-    kiwiSpeed = 1200; // Set the kiwiSpeed for the easy mode
-    // Update active class
-    easyButton.classList.add('active');
-    mediumButton.classList.remove('active');
-    hardButton.classList.remove('active');
-});
+    hardButton.addEventListener('click', () => {
+        kiwiSpeed = 600; // Set the kiwiSpeed for the hard mode
+        easyButton.classList.remove('active');
+        mediumButton.classList.remove('active');
+        hardButton.classList.add('active');
+    });
 
-mediumButton.addEventListener('click', () => {
-    kiwiSpeed = 800; // Set the kiwiSpeed for the medium mode
-    // Update active class
-    easyButton.classList.remove('active');
-    mediumButton.classList.add('active');
-    hardButton.classList.remove('active');
-});
+    isRunning = true;
 
-hardButton.addEventListener('click', () => {
-    kiwiSpeed = 600; // Set the kiwiSpeed for the hard mode
-    // Update active class
-    easyButton.classList.remove('active');
-    mediumButton.classList.remove('active');
-    hardButton.classList.add('active');
-});
-
-
-
-    isRunning = true; // Set the running flag to true
-
-    // Generate a random index to select a hole
     const i = Math.floor(Math.random() * holes.length);
     const hole = holes[i];
 
-    // Determine if it's a bomb or kiwi
-    const isBomb = Math.random() < 0.3; // 30% chance for a bomb
-
-    // Create an image element
+    const isBomb = Math.random() < 0.3;
     const img = document.createElement('img');
     img.classList.add(isBomb ? 'bomb' : 'kiwi');
-    img.src = isBomb ? 'assets/bomb.png' : 'assets/kiwi.png'; // Set the src attribute
+    img.src = isBomb ? 'assets/bomb.png' : 'assets/kiwi.png';
     img.alt = isBomb ? 'Bomb' : 'Kiwi';
-
-    // Prevent the image from being dragged
     img.draggable = false;
 
     if (!isBomb) {
-        // Add a click event listener for the kiwi
         img.addEventListener('click', () => {
             if (hole.contains(img)) {
                 score += 1;
@@ -207,14 +183,14 @@ hardButton.addEventListener('click', () => {
                 setTimeout(() => {
                     if (hole.contains(img)) {
                         hole.removeChild(img);
-                        isRunning = false; // Set the running flag to false after handling the click
+                        isRunning = false;
                         if (score < 10) {
                             run();
                         }
                     }
                 }, 50);
             }
-        }); 
+        });
     } else {
         img.addEventListener('click', handleBombClick);
     }
@@ -224,7 +200,7 @@ hardButton.addEventListener('click', () => {
     setTimeout(() => {
         if (hole.contains(img)) {
             hole.removeChild(img);
-            isRunning = false; // Set the running flag to false when the game loop is complete
+            isRunning = false;
             if (score < 10) {
                 run();
             }
@@ -232,29 +208,23 @@ hardButton.addEventListener('click', () => {
     }, kiwiSpeed);
 }
 
+run(); // Start the game loop
 
-
-// Call the `run` function to start the game
-run();
-
-// Add a mousemove event listener to update the cursor position
+// Event listeners for cursor interaction
 window.addEventListener('mousemove', e => {
     cursor.style.top = e.pageY + 'px';
     cursor.style.left = e.pageX + 'px';
 });
 
-// Add a mousedown event listener to activate the cursor
 window.addEventListener('mousedown', () => {
     cursor.classList.add('active');
 });
 
-// Add a mouseup event listener to deactivate the cursor
 window.addEventListener('mouseup', () => {
     cursor.classList.remove('active');
 });
 
 // Function to reset the game
-
 function resetGame() {
     score = 0;
     gameEnded = false;
@@ -269,6 +239,3 @@ function resetGame() {
 
     run();
 }
-
-
-
