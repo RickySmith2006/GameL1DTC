@@ -183,3 +183,8 @@ body {
     margin-top: 3rem;
 }
 
+.difficulty-indicator{
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    display: block;
+}

@@ -6,14 +6,12 @@ const instructions = document.querySelector('.instructions');
 const difficulty = document.querySelector('.difficulty-button-container');
 const scoreDisplay = document.querySelector('.score');
 const timer = document.querySelector('.timer');
+const difficultyButton = document.querySelector('.difficulty-button');
+
 let kiwiSpeed = 1200;
-
-
-
 
 const holes = [...document.querySelectorAll('.hole')];
 const scoreEl = document.querySelector('.score span');
-
 
 const startButton = document.getElementById('start-button');
 const startScreen = document.querySelector('.start-screen');
@@ -23,20 +21,42 @@ const timerShow = document.querySelector('.timerShow')
 const textDifficulty = document.querySelector('.text-difficulty')
 
 
+let selectedDifficulty = '';
 
+// Add a click event listener to the "Start Game" button
 startButton.addEventListener('click', () => {
     startScreen.style.display = 'none'; // Hide the start screen
     gameElements.style.display = 'inline-block'; // Display the game elements
-    boardShow.style.display = 'grid'; //Display Board
-    timerShow.style.display = 'inline-block'; //Display timer
-    textDifficulty.style.display= 'none'
-    instructions.style.display= 'none'
+    boardShow.style.display = 'grid'; // Display Board
+    timerShow.style.display = 'inline-block'; // Display timer
+    textDifficulty.style.display = 'none';
+    instructions.style.display = 'none';
+    difficultyButton.style.display ='none';
+    difficulty.style.display ='none';
 
-    startTimer();
 
+        // Start the timer
+        startTimer();
+
+    // Set the selected difficulty
+    if (document.querySelector('.easy-button').classList.contains('active')) {
+        selectedDifficulty = 'Easy';
+    } else if (document.querySelector('.medium-button').classList.contains('active')) {
+        selectedDifficulty = 'Medium';
+    } else if (document.querySelector('.hard-button').classList.contains('active')) {
+        selectedDifficulty = 'Hard';
+    }
+
+    // Create an element to display the selected difficulty
+    const difficultyElement = document.createElement('div');
+    difficultyElement.classList.add('difficulty-indicator');
+    difficultyElement.textContent = `Difficulty: ${selectedDifficulty}`;
+    document.body.appendChild(difficultyElement);
 });
 
 
+
+//Timer
 
 const timerElement = document.getElementById('timer');
 const timeRemainingElement = document.getElementById('time-remaining');
@@ -73,21 +93,23 @@ function endGame(message) {
         difficulty.style.display = 'none';
         scoreDisplay.style.display = 'none';
         timer.style.display = 'none';
+        const difficultyIndicator = document.querySelector('.difficulty-indicator')
+        difficultyIndicator.style.display ='none';
         clearInterval(timerInterval);
-
-
-
+        
+        
+        
         // Display an end message
         const endScreen = document.createElement('div');
         endScreen.classList.add('end-screen');
         endScreen.innerHTML = `
-            <div class="end-message" style="text-align: center;">
-                <h1 style="font-size: 5rem">${message}</h1>
-                <button class="reset-button">Play Again</button>
-            </div>
+        <div class="end-message" style="text-align: center;">
+        <h1 style="font-size: 5rem">${message}</h1>
+        <button class="reset-button">Play Again</button>
+        </div>
         `;
         document.body.appendChild(endScreen);
-
+        
         // Add a click event listener to the reset button
         const resetButton = document.querySelector('.reset-button');
         resetButton.addEventListener('click', () => {
@@ -96,6 +118,9 @@ function endGame(message) {
         });
     }
 }
+
+
+
 
 // Function to handle the player clicking on a bomb
 function handleBombClick() {
@@ -148,8 +173,6 @@ hardButton.addEventListener('click', () => {
     mediumButton.classList.remove('active');
     hardButton.classList.add('active');
 });
-
-
 
 
 
@@ -208,12 +231,6 @@ hardButton.addEventListener('click', () => {
         }
     }, kiwiSpeed);
 }
-
-
-
-
-
-
 
 
 
