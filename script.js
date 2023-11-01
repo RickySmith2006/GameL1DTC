@@ -88,7 +88,6 @@ function endGame(message) {
         board.style.display = 'none';
         instructions.style.display = 'none';
         difficulty.style.display = 'none';
-        scoreDisplay.style.display = 'none';
         timer.style.display = 'none';
         const difficultyIndicator = document.querySelector('.difficulty-indicator');
         difficultyIndicator.style.display = 'none';
