@@ -88,7 +88,7 @@ function endGame(message) {
         board.style.display = 'none';
         instructions.style.display = 'none';
         difficulty.style.display = 'none';
-        timer.style.display = 'none';
+        // timer.style.display = 'none';
         const difficultyIndicator = document.querySelector('.difficulty-indicator');
         difficultyIndicator.style.display = 'none';
         clearInterval(timerInterval);
@@ -152,7 +152,7 @@ function run() {
     });
 
     hardButton.addEventListener('click', () => {
-        kiwiSpeed = 600; // Set the kiwiSpeed for the hard mode
+        kiwiSpeed = 500; // Set the kiwiSpeed for the hard mode
         easyButton.classList.remove('active');
         mediumButton.classList.remove('active');
         hardButton.classList.add('active');
